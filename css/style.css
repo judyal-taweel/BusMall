@@ -1,0 +1,33 @@
+body{
+    background-color: gray;
+}
+h1{
+    font-size: 70px;
+    text-align: center;
+    font-family:'Lobster', cursive;
+    font-style: bold;
+}
+img{
+    width: 33%;
+    height: 25%;
+    margin-top: 40px;
+    
+}
+button{
+    padding: 20px;
+    color: thistle;
+    background-color: black;
+    font-size: 25px;
+    margin-left: 37%;
+
+}
+#unlist {
+padding: 50px;
+background-color: black;
+color: thistle;
+}
+li{
+    color: thistle;
+    font-size: 20px;
+    margin: 5px;
+}
