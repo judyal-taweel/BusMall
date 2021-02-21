@@ -95,7 +95,6 @@ function clickOn(event){
         
     }
     else{
-         
         let unlist = document.getElementById('unlist');
         let li;
         for(let i=0; i<objectArr.length; i++){
