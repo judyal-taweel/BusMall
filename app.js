@@ -95,10 +95,8 @@ function clickOn(event){
         
     }
     else{
-        let button = document.getElementById('button');
-        
+         
         let unlist = document.getElementById('unlist');
-        unlist.appendChild(button);
         let li;
         for(let i=0; i<objectArr.length; i++){
             li = document.createElement('li');
