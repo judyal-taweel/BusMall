@@ -11,6 +11,7 @@ let objectArr = [];
 let arrName = [];
 let arrVote = [];
 let arrShown = [];
+let arrImg = [];
 
 function Busmall(name, source) {
     this.name = name;
@@ -63,7 +64,16 @@ function renderImages() {
         centerIndex = generateRandomIndex();
         rightIndex = generateRandomIndex();
 
+        
+        //  function images(){
+        //      for(j=0 ;j<arrImg.length;j++){
+        //         arrImg[j].push()
+        //      }
+     
+        //  }
+
     }
+
     // if (leftIndex = objectArr.includes(leftIndex)){
     //     leftIndex = generateRandomIndex();
     // }else if (centerIndex = objectArr.includes(centerIndex)){
@@ -136,10 +146,10 @@ function clickOn(event) {
 function chartRender() {
     var ctx = document.getElementById('myChart').getContext('2d');
     var chart = new Chart(ctx, {
-        type: 'pie',
+        type: 'bar',
 
         data: {
-            labels: arrName,
+            labels: arrName ,
             datasets: [{
                 label: 'BusMall Votes',
                 backgroundColor: [
@@ -164,10 +174,10 @@ function chartRender() {
                     "#FFB6C1",
                     "#FFC0CB",
 
-                  ],
+                    ],
                 borderColor: 'rgb(255, 99, 132)',
                 data: arrVote,
-            }, {
+            }, { 
                 label: 'BusMall Displayed',
                 backgroundColor: [
                     "#FF4500",
@@ -194,6 +204,7 @@ function chartRender() {
                   ],
                 borderColor: 'rgb(155,100,30)',
                 data: arrShown,
+                
 
             }]
         },
