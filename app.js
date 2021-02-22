@@ -48,27 +48,29 @@ function renderImages(){
     rightIndex = generateRandomIndex();
 
     while(leftIndex === rightIndex || leftIndex === centerIndex || centerIndex === rightImage){
+        leftIndex = generateRandomIndex();
         centerIndex = generateRandomIndex();
+        rightIndex = generateRandomIndex();
+
     }
 
     leftImage.setAttribute('src',objectArr[leftIndex].source);
+    objectArr[leftIndex].shownImg++;
     centerImage.setAttribute('src',objectArr[centerIndex].source);
+    objectArr[centerIndex].shownImg++;
     rightImage.setAttribute('src',objectArr[rightIndex].source);
+    objectArr[rightIndex].shownImg++;
 
 
-    // if(leftIndex === centerIndex){
-    //     leftIndex = generateRandomIndex();
-    // }else if(centerIndex === rightIndex){
-    //     centerIndex = generateRandomIndex();
-    // }else if(leftIndex === rightIndex){
-    //     rightIndex = generateRandomIndex();
-    // }
 }
 renderImages();
+let button = document.getElementById('button');
+button.addEventListener('click',clickOn);
 
 leftImage.addEventListener('click' , clickOn);
 centerImage.addEventListener('click' , clickOn);
 rightImage.addEventListener('click' ,clickOn);
+
 
 function clickOn(event){
     attempts++;
@@ -76,25 +78,20 @@ function clickOn(event){
     if(attempts <= maxClicks){
         if(event.target.id === 'leftimg'){
             objectArr[leftIndex].vote++;
-            objectArr[leftIndex].shownImg++;
-            objectArr[centerIndex].shownImg++;
-            objectArr[rightIndex].shownImg++;
+           
         }else if(event.target.id === 'centerimg'){
             objectArr[centerIndex].vote++;
-            objectArr[centerIndex].shownImg++;
-            objectArr[leftIndex].shownImg++;
-            objectArr[rightIndex].shownImg++;
+           
         }else{
             objectArr[rightIndex].vote++;
-            objectArr[rightIndex].shownImg++;
-            objectArr[leftIndex].shownImg++;
-            objectArr[centerIndex].shownImg++;
+            
     }
     renderImages();
         
         
     }
     else{
+
         let unlist = document.getElementById('unlist');
         let li;
         for(let i=0; i<objectArr.length; i++){
@@ -110,6 +107,7 @@ function clickOn(event){
 
     }
 }
+
 
 function generateRandomIndex(){
 let randomIndex = Math.floor(Math.random() * objectArr.length); 
