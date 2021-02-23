@@ -47,9 +47,13 @@ function renderImages(){
     centerIndex = generateRandomIndex();
     rightIndex = generateRandomIndex();
 
-    while(leftIndex === rightIndex || leftIndex === centerIndex || centerIndex === rightImage){
+    while(leftIndex === rightIndex){
         leftIndex = generateRandomIndex();
+    }
+    while(leftIndex === centerIndex ){    
         centerIndex = generateRandomIndex();
+    }
+    while(centerIndex === rightImage){
         rightIndex = generateRandomIndex();
 
     }
@@ -115,4 +119,5 @@ return randomIndex;
 }
 
 
+button.removeEventListener('click',clickOn);
 
