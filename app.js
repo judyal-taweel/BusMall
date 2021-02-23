@@ -12,6 +12,7 @@ let arrName = [];
 let arrVote = [];
 let arrShown = [];
 let arrImg = [];
+let theVotes = [];
 
 function Busmall(name, source) {
     this.name = name;
@@ -20,6 +21,7 @@ function Busmall(name, source) {
     this.vote = 0;
     objectArr.push(this);
     arrName.push(this.name);
+    theVotes.push(this.vote);
 
 }
 
@@ -49,6 +51,8 @@ new Busmall('unicorn', 'img/unicorn.jpg');
 new Busmall('usb', 'img/usb.gif');
 new Busmall('water-can', 'img/water-can.jpg');
 new Busmall('wine-glass', 'img/wine-glass.jpg');
+
+
 
 
 let leftIndex;
@@ -89,16 +93,19 @@ function renderImages() {
     rightImage.setAttribute('src', objectArr[rightIndex].source);
     objectArr[rightIndex].shownImg++;
 
-
+    
 }
+
 renderImages();
 let button = document.getElementById('button');
 button.addEventListener('click', clickOn);
+
 
 leftImage.addEventListener('click', clickOn);
 centerImage.addEventListener('click', clickOn);
 rightImage.addEventListener('click', clickOn);
 
+getVotes();
 
 function clickOn(event) {
     attempts++;
@@ -114,6 +121,8 @@ function clickOn(event) {
             objectArr[rightIndex].vote++;
 
         }
+        setVotes();
+        console.log(objectArr);
         renderImages();
 
 
@@ -126,11 +135,11 @@ function clickOn(event) {
         for (let i = 0; i < objectArr.length; i++) {
             li = document.createElement('li');
             unlist.appendChild(li);
-            li.textContent = `${objectArr[i].name} had ${objectArr[i].vote} , and was seen ${objectArr[i].shownImg} times.`
+            li.textContent = `${objectArr[i].name} had ${objectArr[i].vote} votes , and was seen ${objectArr[i].shownImg} times.`
 
         }
 
-
+        
         chartRender();
         leftImage.removeEventListener('click', clickOn);
         centerImage.removeEventListener('click', clickOn);
@@ -140,9 +149,34 @@ function clickOn(event) {
             arrVote.push(objectArr[x].vote);
             arrShown.push(objectArr[x].shownImg);
         }
-
+            
     }
+   
 }
+
+function setVotes(){
+    // for(let n = 0 ;n<=objectArr.length;n++){
+let setpic = JSON.stringify(objectArr);
+localStorage.setItem('allVotes',setpic);
+}
+// }
+function getVotes(){
+let gitpic = localStorage.getItem('allVotes');
+let pics = JSON.parse(gitpic);
+
+if(pics){
+    objectArr = pics;
+}else{
+    objectArr = [];
+}
+renderImages();
+
+}
+
+
+
+
+
 function chartRender() {
     var ctx = document.getElementById('myChart').getContext('2d');
     var chart = new Chart(ctx, {
