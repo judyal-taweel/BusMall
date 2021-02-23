@@ -12,7 +12,6 @@ let arrName = [];
 let arrVote = [];
 let arrShown = [];
 let arrImg = [];
-let theVotes = [];
 
 function Busmall(name, source) {
     this.name = name;
@@ -21,7 +20,6 @@ function Busmall(name, source) {
     this.vote = 0;
     objectArr.push(this);
     arrName.push(this.name);
-    theVotes.push(this.vote);
 
 }
 
@@ -55,28 +53,41 @@ new Busmall('wine-glass', 'img/wine-glass.jpg');
 
 
 
-let leftIndex;
-let centerIndex;
-let rightIndex;
+let leftIndex = -1;
+let centerIndex = -1;
+let rightIndex = -1;
 function renderImages() {
-    leftIndex = generateRandomIndex();
+                    //-1
+    let arrImg = [leftIndex,centerIndex,rightIndex];
+
+    leftIndex = generateRandomIndex(); //3
     centerIndex = generateRandomIndex();
     rightIndex = generateRandomIndex();
-
-    while (leftIndex === rightIndex || leftIndex === centerIndex || centerIndex === rightImage) {
+    console.log(arrImg);
+    while(arrImg.includes(leftIndex)){
         leftIndex = generateRandomIndex();
-        centerIndex = generateRandomIndex();
-        rightIndex = generateRandomIndex();
-
-        
-        //  function images(){
-        //      for(j=0 ;j<arrImg.length;j++){
-        //         arrImg[j].push()
-        //      }
-     
-        //  }
-
     }
+    while(leftIndex === centerIndex  || arrImg.includes(centerIndex)){
+        centerIndex = generateRandomIndex()
+    }
+    while(rightIndex === leftIndex || rightIndex === centerIndex || arrImg.includes(rightIndex)){
+        rightIndex= generateRandomIndex();
+    }
+    // while (leftIndex === rightIndex || leftIndex === centerIndex || centerIndex === rightIndex || arrImg.includes(leftIndex) || arrImg.includes(rightIndex) || arrImg.includes(centerIndex)) {
+    //     console.log('infinte ???')
+
+    //     leftIndex = generateRandomIndex();
+    //     centerIndex = generateRandomIndex();
+    //     rightIndex = generateRandomIndex();
+
+
+    //     //     //  function images(){
+    //     //     //      for(j=0 ;j<arrImg.length;j++){
+    //     //     //         arrImg[j].push()
+    //     //     //      }
+
+    //     //     //  }
+
 
     // if (leftIndex = objectArr.includes(leftIndex)){
     //     leftIndex = generateRandomIndex();
@@ -93,7 +104,7 @@ function renderImages() {
     rightImage.setAttribute('src', objectArr[rightIndex].source);
     objectArr[rightIndex].shownImg++;
 
-    
+
 }
 
 renderImages();
@@ -105,7 +116,6 @@ leftImage.addEventListener('click', clickOn);
 centerImage.addEventListener('click', clickOn);
 rightImage.addEventListener('click', clickOn);
 
-getVotes();
 
 function clickOn(event) {
     attempts++;
@@ -119,10 +129,8 @@ function clickOn(event) {
 
         } else {
             objectArr[rightIndex].vote++;
-
         }
         setVotes();
-        console.log(objectArr);
         renderImages();
 
 
@@ -136,42 +144,24 @@ function clickOn(event) {
             li = document.createElement('li');
             unlist.appendChild(li);
             li.textContent = `${objectArr[i].name} had ${objectArr[i].vote} votes , and was seen ${objectArr[i].shownImg} times.`
-
         }
 
-        
+
         chartRender();
         leftImage.removeEventListener('click', clickOn);
         centerImage.removeEventListener('click', clickOn);
         rightImage.removeEventListener('click', clickOn);
+        
 
         for (let x = 0; x < objectArr.length; x++) {
             arrVote.push(objectArr[x].vote);
             arrShown.push(objectArr[x].shownImg);
         }
-            
+
     }
-   
-}
-
-function setVotes(){
-    // for(let n = 0 ;n<=objectArr.length;n++){
-let setpic = JSON.stringify(objectArr);
-localStorage.setItem('allVotes',setpic);
-}
-// }
-function getVotes(){
-let gitpic = localStorage.getItem('allVotes');
-let pics = JSON.parse(gitpic);
-
-if(pics){
-    objectArr = pics;
-}else{
-    objectArr = [];
-}
-renderImages();
 
 }
+
 
 
 
@@ -183,7 +173,7 @@ function chartRender() {
         type: 'bar',
 
         data: {
-            labels: arrName ,
+            labels: arrName,
             datasets: [{
                 label: 'BusMall Votes',
                 backgroundColor: [
@@ -208,10 +198,10 @@ function chartRender() {
                     "#FFB6C1",
                     "#FFC0CB",
 
-                    ],
+                ],
                 borderColor: 'rgb(255, 99, 132)',
                 data: arrVote,
-            }, { 
+            }, {
                 label: 'BusMall Displayed',
                 backgroundColor: [
                     "#FF4500",
@@ -235,10 +225,10 @@ function chartRender() {
                     "#00FA9A",
                     "#3CB371",
 
-                  ],
+                ],
                 borderColor: 'rgb(155,100,30)',
                 data: arrShown,
-                
+
 
             }]
         },
@@ -248,7 +238,45 @@ function chartRender() {
 
 }
 
+// function savedOrders(){
+//     let order = JSON.stringify(objectArr);
+//     localStorage.setItem('AllOrders', order);
+//   }
+
+
+//   function getOrder(){
+//     let gettingOrder = localStorage.getItem('AllOrders');
+//     let list = JSON.parse(gettingOrder);
+
+//     if(list){ 
+//       objectArr = list;
+//     }else{
+//       objectArr = [];
+//     }
+//     renderImages();
+//   }
+// getOrder();
 
 
 
 
+function setVotes() {
+    let setpic = JSON.stringify(objectArr);
+    localStorage.setItem('allVotes', setpic);
+}
+
+function getVotes() {
+    let gitpic = localStorage.getItem('allVotes');
+    let pics = JSON.parse(gitpic);
+
+    if (pics) {
+        objectArr = pics;
+    } else {
+        objectArr = [];
+    }
+    renderImages();
+}
+getVotes();
+
+
+button.removeEventListener('click', clickOn);
