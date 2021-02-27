@@ -112,8 +112,8 @@ function clickOn(event){
         unlist.appendChild(li);
         li.textContent=`${objectArr[i].name} had ${objectArr[i].vote} , and was seen ${objectArr[i].shownImg} times.`
     }
-    }
     button.removeEventListener('click',clickOnButton);
+    }
 
 
 
