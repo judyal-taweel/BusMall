@@ -109,7 +109,6 @@ function renderImages() {
 
 renderImages();
 let button = document.getElementById('button');
-button.addEventListener('click', clickOn);
 
 
 leftImage.addEventListener('click', clickOn);
@@ -136,17 +135,6 @@ function clickOn(event) {
 
     }
     else {
-
-
-        let unlist = document.getElementById('unlist');
-        let li;
-        for (let i = 0; i < objectArr.length; i++) {
-            li = document.createElement('li');
-            unlist.appendChild(li);
-            li.textContent = `${objectArr[i].name} had ${objectArr[i].vote} votes , and was seen ${objectArr[i].shownImg} times.`
-        }
-
-
         chartRender();
         leftImage.removeEventListener('click', clickOn);
         centerImage.removeEventListener('click', clickOn);
@@ -161,7 +149,19 @@ function clickOn(event) {
     }
 
 }
+button.addEventListener('click', clickOnButton);
 
+function clickOnButton(event){
+let unlist = document.getElementById('unlist');
+let li;
+for (let i = 0; i < objectArr.length; i++) {
+    li = document.createElement('li');
+    unlist.appendChild(li);
+    li.textContent = `${objectArr[i].name} had ${objectArr[i].vote} votes , and was seen ${objectArr[i].shownImg} times.`
+}
+chartRender();
+button.removeEventListener('click', clickOn);
+}
 
 
 
@@ -279,4 +279,3 @@ function getVotes() {
 getVotes();
 
 
-button.removeEventListener('click', clickOn);
