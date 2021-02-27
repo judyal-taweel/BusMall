@@ -47,16 +47,14 @@ function renderImages(){
     centerIndex = generateRandomIndex();
     rightIndex = generateRandomIndex();
 
-    while(leftIndex === rightIndex){
+    while(leftIndex === rightIndex || leftIndex === centerIndex || centerIndex === rightImage){
         leftIndex = generateRandomIndex();
-    }
-    while(leftIndex === centerIndex ){    
         centerIndex = generateRandomIndex();
-    }
-    while(centerIndex === rightImage){
         rightIndex = generateRandomIndex();
-
     }
+   
+    
+
 
     leftImage.setAttribute('src',objectArr[leftIndex].source);
     objectArr[leftIndex].shownImg++;
@@ -69,7 +67,6 @@ function renderImages(){
 }
 renderImages();
 let button = document.getElementById('button');
-button.addEventListener('click',clickOn);
 
 leftImage.addEventListener('click' , clickOn);
 centerImage.addEventListener('click' , clickOn);
@@ -95,22 +92,29 @@ function clickOn(event){
         
     }
     else{
-
-        let unlist = document.getElementById('unlist');
-        let li;
-        for(let i=0; i<objectArr.length; i++){
-            li = document.createElement('li');
-            unlist.appendChild(li);
-            li.textContent=`${objectArr[i].name} had ${objectArr[i].vote} , and was seen ${objectArr[i].shownImg} times.`
-
-        }
         leftImage.removeEventListener('click',clickOn);
         centerImage.removeEventListener('click',clickOn);
         rightImage.removeEventListener('click',clickOn);
 
+       
+
+        }
+
 
     }
-}
+    button.addEventListener('click',clickOnButton);
+    function clickOnButton(){
+
+    let unlist = document.getElementById('unlist');
+    let li;
+    for(let i=0; i<objectArr.length; i++){
+        li = document.createElement('li');
+        unlist.appendChild(li);
+        li.textContent=`${objectArr[i].name} had ${objectArr[i].vote} , and was seen ${objectArr[i].shownImg} times.`
+    }
+    }
+    button.removeEventListener('click',clickOnButton);
+
 
 
 function generateRandomIndex(){
@@ -119,5 +123,4 @@ return randomIndex;
 }
 
 
-button.removeEventListener('click',clickOn);
 

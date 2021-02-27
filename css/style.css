@@ -8,7 +8,7 @@ h1{
     font-style: bold;
 }
 img{
-    width: 33%;
+    width: 20%;
     height: 25%;
     margin-top: 40px;
     
@@ -21,13 +21,4 @@ button{
     margin-left: 37%;
 
 }
-#unlist {
-padding: 50px;
-background-color: black;
-color: thistle;
-}
-li{
-    color: thistle;
-    font-size: 20px;
-    margin: 5px;
-}
+
